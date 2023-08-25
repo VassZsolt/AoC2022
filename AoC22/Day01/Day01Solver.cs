@@ -32,6 +32,18 @@ public sealed class Day01Solver
         List<string> caloriesList = inputFileContent.Split("\r\n").ToList();
         caloriesList.Add(string.Empty);
 
+        List<int> amountOfCarriedCalories = AmountsOfCarriedCalories(caloriesList);
+
+        int sumOfTop3CarryingCalories = amountOfCarriedCalories
+            .OrderByDescending(x => x)
+            .Take(3)
+            .Sum();
+
+        return sumOfTop3CarryingCalories.ToString();
+    }
+
+    private static List<int> AmountsOfCarriedCalories(List<string> caloriesList)
+    {
         List<int> amountOfCarriedCalories = new List<int>();
         int sumOfCarryingCalories = 0;
 
@@ -48,15 +60,6 @@ public sealed class Day01Solver
             }
         }
 
-        amountOfCarriedCalories.Sort();
-        amountOfCarriedCalories.Reverse();
-
-        int sumOfTop3CarryingCalories = 0;
-        for (int i = 0; i < 3; i++)
-        {
-            sumOfTop3CarryingCalories += amountOfCarriedCalories[i];
-        }
-
-        return sumOfTop3CarryingCalories.ToString();
+        return amountOfCarriedCalories;
     }
 }
