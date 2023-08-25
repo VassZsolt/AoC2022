@@ -29,37 +29,36 @@ public sealed class Day01Solver
 
     public string SolvePart2(string inputFileContent)
     {
-        List<string> caloriesList = inputFileContent.Split("\r\n").ToList();
-        caloriesList.Add(string.Empty);
-
-        List<int> amountOfCarriedCalories = AmountsOfCarriedCalories(caloriesList);
-
-        int sumOfTop3CarryingCalories = amountOfCarriedCalories
-            .OrderByDescending(x => x)
+        IReadOnlyList<Inventory> inventories = ParseInput(inputFileContent);
+        int result = inventories
+            .OrderByDescending(x => x.SumOfCalories)
             .Take(3)
-            .Sum();
+            .Sum(x => x.SumOfCalories);
 
-        return sumOfTop3CarryingCalories.ToString();
+        return result.ToString();
     }
 
-    private static List<int> AmountsOfCarriedCalories(List<string> caloriesList)
+    private List<Inventory> ParseInput(string inputFileContent)
     {
-        List<int> amountOfCarriedCalories = new List<int>();
-        int sumOfCarryingCalories = 0;
+        List<string> lines = inputFileContent.Split("\r\n").ToList();
+        lines.Add(string.Empty);
 
-        foreach (string calories in caloriesList)
+        List<Inventory> result = new List<Inventory>();
+        List<int> currentInventory = new List<int>();
+
+        foreach (string calories in lines)
         {
             if (calories != string.Empty)
             {
-                sumOfCarryingCalories += int.Parse(calories);
+                currentInventory.Add(int.Parse(calories));
             }
             else
             {
-                amountOfCarriedCalories.Add(sumOfCarryingCalories);
-                sumOfCarryingCalories = 0;
+                result.Add(new Inventory(currentInventory));
+                currentInventory = new List<int>();
             }
         }
 
-        return amountOfCarriedCalories;
+        return result;
     }
 }
