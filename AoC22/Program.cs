@@ -1,4 +1,4 @@
-﻿using AoC22.Day01;
+﻿using AoC22.Day02;
 
 namespace AoC22;
 
@@ -6,8 +6,8 @@ internal static class Program
 {
     private static void Main()
     {
-        const int selectedDay = 1;
-        var solver = new Day01Solver();
+        const int selectedDay = 2;
+        var solver = new Day02Solver();
         
         string inputFileContent = ReadInputForDay(selectedDay);
 
