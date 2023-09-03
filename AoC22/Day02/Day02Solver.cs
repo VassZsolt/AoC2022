@@ -3,6 +3,7 @@
 public class Day02Solver
 {
     private const int DrawScore = 3;
+    private const int WinScore = 6;
 
     public string SolvePart1(string inputFileContent)
     {
@@ -37,10 +38,21 @@ public class Day02Solver
 
     public string SolvePart2(string inputFileContent)
     {
+        char opponentMove = inputFileContent[0];
+
         if (inputFileContent.EndsWith('Y'))
         {
-            char opponentMove = inputFileContent[0];
             int score = opponentMove - 64 + DrawScore; // ASCII magic
+            return score.ToString();
+        }
+        if (inputFileContent.EndsWith('X'))
+        {
+            int score = opponentMove - 64; // ASCII magic
+            return score.ToString();
+        }
+        if (inputFileContent.EndsWith('Z'))
+        {
+            int score = opponentMove - 64 + WinScore; // ASCII magic
             return score.ToString();
         }
 
