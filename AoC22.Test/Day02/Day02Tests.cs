@@ -35,3 +35,16 @@ public class Day02Part1Tests
         result.Should().Be(expectedResult);
     }
 }
+public class Day02Part2Tests
+{
+    [Theory]
+    [InlineData("A Y", 4)] // Need draw against Rock => Rock => 3+1 = 4
+    [InlineData("B Y", 5)] // Need draw against Paper => Paper => 3+2 = 5
+    [InlineData("C Y", 6)] // Need draw against Scissors => Scissors => 3+3 = 6
+    public void ScoresOneRoundCorrectly(string input, int expectedResult)
+    {
+        Day02Solver solver = new Day02Solver();
+        int result = int.Parse(solver.SolvePart2(input));
+        result.Should().Be(expectedResult);
+    }
+}

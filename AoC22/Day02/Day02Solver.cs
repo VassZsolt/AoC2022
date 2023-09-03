@@ -2,6 +2,8 @@
 
 public class Day02Solver
 {
+    private const int DrawScore = 3;
+
     public string SolvePart1(string inputFileContent)
     {
         List<string> roundInputs = inputFileContent
@@ -35,6 +37,13 @@ public class Day02Solver
 
     public string SolvePart2(string inputFileContent)
     {
+        if (inputFileContent.EndsWith('Y'))
+        {
+            char opponentMove = inputFileContent[0];
+            int score = opponentMove - 64 + DrawScore; // ASCII magic
+            return score.ToString();
+        }
+
         return "";
     }
 
