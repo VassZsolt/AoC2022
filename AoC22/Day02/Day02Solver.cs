@@ -4,7 +4,10 @@ public class Day02Solver
 {
     public string SolvePart1(string inputFileContent)
     {
-        List<string> roundInputs = inputFileContent.Split("\r\n").ToList();
+        List<string> roundInputs = inputFileContent
+            .Split("\r\n", StringSplitOptions.RemoveEmptyEntries)
+            .ToList();
+
         string result = roundInputs
             .Select(r => Part1_ScoreOneRound(r))
             .Sum()
