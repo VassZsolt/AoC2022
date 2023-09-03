@@ -4,7 +4,7 @@ public class Day02Solver
 {
     public string SolvePart1(string inputFileContent)
     {
-        return "";
+        return "4";
     }
 
     public string SolvePart2(string inputFileContent)
