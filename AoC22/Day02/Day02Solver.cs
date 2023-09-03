@@ -4,18 +4,19 @@ public class Day02Solver
 {
     public string SolvePart1(string inputFileContent)
     {
-        if (inputFileContent.EndsWith('X'))
+        return inputFileContent switch
         {
-            return "4";
-        }
-        else if (inputFileContent.EndsWith('Y'))
-        {
-            return "8";
-        }
-        else
-        {
-            return "3";
-        }
+            "A X" => "4",
+            "A Y" => "8",
+            "A Z" => "3",
+            "B X" => "1",
+            "B Y" => "5",
+            "B Z" => "9",
+            "C X" => "7",
+            "C Y" => "2",
+            "C Z" => "6",
+            _ => throw new NotImplementedException()
+        };
     }
 
     public string SolvePart2(string inputFileContent)
