@@ -7,6 +7,7 @@ public class Day02Part1Tests
 {
     [Theory]
     [InlineData("A X", 4)] // Rock vs Rock => 3+1 = 4
+    [InlineData("A Y", 8)] // Rock vs Paper => 6+2 = 8
     public void ScoresOneRoundCorrectly(string input, int expectedResult)
     {
         Day02Solver solver = new Day02Solver();
