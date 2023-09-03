@@ -21,4 +21,17 @@ public class Day02Part1Tests
         int result = int.Parse(solver.SolvePart1(input));
         result.Should().Be(expectedResult);
     }
+
+    [Theory]
+    [InlineData("""
+        A Y
+        B X
+        C Z
+        """, 15)]
+    public void ScoresMultipleRoundsCorrectly(string input, int expectedResult)
+    {
+        Day02Solver solver = new Day02Solver();
+        int result = int.Parse(solver.SolvePart1(input));
+        result.Should().Be(expectedResult);
+    }
 }
