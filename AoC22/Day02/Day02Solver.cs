@@ -8,9 +8,13 @@ public class Day02Solver
         {
             return "4";
         }
-        else
+        else if (inputFileContent.EndsWith('Y'))
         {
             return "8";
+        }
+        else
+        {
+            return "3";
         }
     }
 
