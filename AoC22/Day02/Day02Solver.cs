@@ -38,25 +38,32 @@ public class Day02Solver
 
     public string SolvePart2(string inputFileContent)
     {
-        char opponentMove = inputFileContent[0];
+        List<string> roundInputs = inputFileContent
+            .Split("\r\n", StringSplitOptions.RemoveEmptyEntries)
+            .ToList();
 
-        if (inputFileContent.EndsWith('Y'))
-        {
-            int score = opponentMove - 64 + DrawScore; // ASCII magic
-            return score.ToString();
-        }
-        if (inputFileContent.EndsWith('X'))
-        {
-            int score = opponentMove - 64; // ASCII magic
-            return score.ToString();
-        }
-        if (inputFileContent.EndsWith('Z'))
-        {
-            int score = opponentMove - 64 + WinScore; // ASCII magic
-            return score.ToString();
-        }
+        string result = roundInputs
+            .Select(r => Part2_ScoreOneRound(r))
+            .Sum()
+            .ToString();
 
-        return "";
+        return result;
     }
 
+    private static int Part2_ScoreOneRound(string roundInput)
+    {
+        return roundInput switch
+        {
+            "A X" => 3,
+            "A Y" => 4,
+            "A Z" => 8,
+            "B X" => 1,
+            "B Y" => 5,
+            "B Z" => 9,
+            "C X" => 2,
+            "C Y" => 6,
+            "C Z" => 7,
+            _ => throw new NotImplementedException()
+        };
+    }
 }

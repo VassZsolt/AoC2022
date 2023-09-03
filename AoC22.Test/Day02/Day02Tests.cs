@@ -38,16 +38,29 @@ public class Day02Part1Tests
 public class Day02Part2Tests
 {
     [Theory]
+    [InlineData("A X", 3)] // Need lose against Rock => Scissors => 0+3 = 3
     [InlineData("A Y", 4)] // Need draw against Rock => Rock => 3+1 = 4
+    [InlineData("A Z", 8)] // Need win against Rock => Paper => 6+2 = 8
+    [InlineData("B X", 1)] // Need lose against Paper => Rock => 0+1 = 1
     [InlineData("B Y", 5)] // Need draw against Paper => Paper => 3+2 = 5
+    [InlineData("B Z", 9)] // Need win against Paper => Scissors => 6+3 = 9
+    [InlineData("C X", 2)] // Need lose against Scissors => Paper => 0+2 = 2
     [InlineData("C Y", 6)] // Need draw against Scissors => Scissors => 3+3 = 6
-    [InlineData("A X", 1)] // Need lose against Rock => Scissors => 0+1 = 1
-    [InlineData("B X", 2)] // Need lose against Paper => Rock => 0+2 = 2
-    [InlineData("C X", 3)] // Need lose against Scissors => Paper => 0+3 = 3
-    [InlineData("A Z", 7)] // Need win against Rock => Paper => 6+1 = 7
-    [InlineData("B Z", 8)] // Need win against Paper => Scissors => 6+2 = 8
-    [InlineData("C Z", 9)] // Need win against Scissors => Rock => 6+3 = 9
+    [InlineData("C Z", 7)] // Need win against Scissors => Rock => 6+1 = 7
     public void ScoresOneRoundCorrectly(string input, int expectedResult)
+    {
+        Day02Solver solver = new Day02Solver();
+        int result = int.Parse(solver.SolvePart2(input));
+        result.Should().Be(expectedResult);
+    }
+
+    [Theory]
+    [InlineData("""
+        A Y
+        B X
+        C Z
+        """, 12)]
+    public void ScoresMultipleRoundsCorrectly(string input, int expectedResult)
     {
         Day02Solver solver = new Day02Solver();
         int result = int.Parse(solver.SolvePart2(input));
