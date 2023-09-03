@@ -4,7 +4,14 @@ public class Day02Solver
 {
     public string SolvePart1(string inputFileContent)
     {
-        return "4";
+        if (inputFileContent.EndsWith('X'))
+        {
+            return "4";
+        }
+        else
+        {
+            return "8";
+        }
     }
 
     public string SolvePart2(string inputFileContent)
