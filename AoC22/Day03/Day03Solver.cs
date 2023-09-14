@@ -12,22 +12,19 @@ public class Day03Solver
 
         foreach(string rucksack in rucksacks)
         {
-            List<string> rucksackCompartments=GetRucksackCompartments(rucksack);            
+            List<string> rucksackCompartments=GetRucksackCompartments(rucksack);
         }
-
-
-
         return result;
     }
 
+
+
     private List<string> GetRucksackCompartments(string oneRucksack) // A rekeszek szétválasztása
     {
-        List<string> result = new List<string>
+        return new List<string>
         {
             oneRucksack.Substring(0, oneRucksack.Length / 2),
             oneRucksack.Substring(oneRucksack.Length / 2)
         };
-
-        return result;
     }
 }
