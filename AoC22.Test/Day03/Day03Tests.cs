@@ -18,4 +18,22 @@ public class Day03Tests
         int result = int.Parse(solver.SolvePart1(input));
         result.Should().Be(expectedResults);
     }
+
+    [Theory]
+    [InlineData("""
+        vJrwpWtwJgWrhcsFMMfFFhFp
+        jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+        PmmdzqPrVvPwwTWBwg
+        """,18)]
+    [InlineData("""
+        wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+        ttgJtRGJQctTZtZT
+        CrZsJsPPZsGzwwsLwLmpwMDw
+        """, 52)]
+    public void VerifyPriorityOfGroups(string input, int expectedResults)
+    {
+        Day03Solver solver = new Day03Solver();
+        int result = int.Parse(solver.SolvePart2(input));
+        result.Should().Be(expectedResults);
+    }
 }
