@@ -1,4 +1,6 @@
-﻿namespace AoC22.Day03;
+﻿using System.Text;
+
+namespace AoC22.Day03;
 
 public class Day03Solver
 {
@@ -54,5 +56,39 @@ public class Day03Solver
             oneRucksack.Substring(0, oneRucksack.Length / 2),
             oneRucksack.Substring(oneRucksack.Length / 2)
         };
+    }
+
+    public string SolvePart2(string inputFileContent)
+    {
+        List<string> rucksacks = inputFileContent
+            .Split("\r\n", StringSplitOptions.RemoveEmptyEntries)
+            .ToList();
+
+        int sum = 0;
+
+        for(int i=2; i< rucksacks.Count; i+=3)
+        {
+            char sharedItem = SharedItemBetweenRucksacks(new List<string>
+            {
+                rucksacks[i-2],
+                rucksacks[i-1],
+                rucksacks[i]
+            });
+            sum += ItemPriority(sharedItem);
+        }
+
+        return sum.ToString();
+    }
+
+    private char SharedItemBetweenRucksacks(List<string> rucksacks) // A hátizsákok közös tartalma
+    {
+        foreach (char item in rucksacks[0])
+        {
+            if (rucksacks[1].Contains(item) && rucksacks[2].Contains(item))
+            {
+                return item;
+            }
+        }
+        return ' ';
     }
 }
