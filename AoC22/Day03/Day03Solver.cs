@@ -4,23 +4,40 @@ public class Day03Solver
 {
     public string SolvePart1(string inputFileContent) // A prioritások össszege
     {
-        string result = "";
-
         List<string> rucksacks = inputFileContent
             .Split("\r\n", StringSplitOptions.RemoveEmptyEntries)
             .ToList();
 
-        foreach(string rucksack in rucksacks)
+        int sum = 0;
+        foreach (string rucksack in rucksacks)
         {
-            List<string> rucksackCompartments=GetRucksackCompartments(rucksack);
-            char sharedItem=SharedItemBetweenCompartments(rucksackCompartments);
+            List<string> rucksackCompartments = GetRucksackCompartments(rucksack);
+            char sharedItem = SharedItemBetweenCompartments(rucksackCompartments);
+            sum += ItemPriority(sharedItem);
         }
-        return result;
+        return sum.ToString();
+    }
+
+    private int ItemPriority(char item) // Az adott item prioritása
+    {
+        if (IsLowerCase(item))
+        {
+            return (int)item - 96; // Kisbetűk esetén a prioritás értéke 1-26
+        }
+        else // Feltételezzük hogy ami nem kisbetűs az nagybetűs
+        {
+            return (int)item - 38; // Nagybetűk esetén a prioritás értéke 27-52
+        }
+    }
+
+    private bool IsLowerCase(char letter)
+    {
+        return (int)letter > 96 && (int)letter < 123;
     }
 
     private char SharedItemBetweenCompartments(List<string> rucksackCompartments) // A rekeszek közös tartalma
     {
-        foreach(char item in rucksackCompartments[0])
+        foreach (char item in rucksackCompartments[0])
         {
             if (rucksackCompartments[1].Contains(item))
             {
@@ -30,7 +47,7 @@ public class Day03Solver
         return ' ';
     }
 
-    private List<string> GetRucksackCompartments(string oneRucksack) // A rekeszek szétválasztása
+    private static List<string> GetRucksackCompartments(string oneRucksack) // A rekeszek szétválasztása
     {
         return new List<string>
         {
