@@ -62,6 +62,37 @@ public class Day04Solver
 
     public string SolvePart2(string inputFileContent)
     {
-        return "";
+        List<string> sectionPairs = SplitToList(inputFileContent, "\r\n"); // Minden sor egy tartomány párt határoz meg
+        int counter = 0;
+        foreach (string sectionPair in sectionPairs)
+        {
+            if (IsOneSectionOverlapTheOther(sectionPair))
+            {
+                counter++;
+            }
+        }
+        return counter.ToString();
+    }
+    private bool IsOneSectionOverlapTheOther(string sectionPair)
+    {
+        List<string> sections = SplitToList(sectionPair, ","); // Minden tartomány pár felbontható tartományokra (egyes elfek ezek mentén takarítanak)
+        List<string> openedSectionA = RepleceSectionsToNumbers(sections[0]);
+        List<string> openedSectionB = RepleceSectionsToNumbers(sections[1]);
+
+        if (CalculateIntersection(openedSectionA, openedSectionB).Count != 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private List<string> CalculateIntersection(List<string> setA, List<string> setB) // A két halmaz metszete
+    {
+        HashSet<string> intersection = new HashSet<string>(setA);
+        intersection.IntersectWith(setB);
+        return intersection.ToList();
     }
 }
