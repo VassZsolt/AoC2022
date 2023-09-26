@@ -6,12 +6,27 @@ public class Crate
 }
 public class CrateTower
 {
-    public List<Crate> crates;
+    public List<Crate> tower;
 
-    public CrateTower(List<Crate> crates) => this.crates = crates; // Az utolsó elem lesz a legfelső elem!
-    public void PlaceCrate(Crate crate) => crates.Add(crate);
-    public void RemoveTopCrate() => crates.RemoveAt(crates.Count - 1);
-    public Crate GetTopCrate() => crates[crates.Count - 1];
+    public CrateTower(List<Crate> crates) => tower = crates; // Az utolsó elem lesz a legfelső elem!
+    public void PlaceCrates(List<Crate> crates) => tower.AddRange(crates);
+    private void RemoveTopNCrates(int n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            tower.RemoveAt(tower.Count - 1);
+        }
+    }
+    public List<Crate> GetTopNCrates(int n)
+    {
+        List<Crate> result= new List<Crate>();
+        for(int i = 0; i < n; i++)
+        {
+            result.Add(tower[tower.Count - 1]);
+            RemoveTopNCrates(1);
+        }
+        return result;
+    }
 }
 public class Warehouse
 {
@@ -19,10 +34,9 @@ public class Warehouse
 
     public Warehouse(List<CrateTower> crateTowers) => this.crateTowers = crateTowers;
 
-    public void MoveCrate(int from, int to)
+    public void MoveCrates(int quantity, int from, int to)
     {
-        crateTowers[to - 1].PlaceCrate(
-            crateTowers[from - 1].GetTopCrate());
-        crateTowers[from - 1].RemoveTopCrate();
+        crateTowers[to - 1].PlaceCrates(
+            crateTowers[from - 1].GetTopNCrates(quantity));
     }
 }
