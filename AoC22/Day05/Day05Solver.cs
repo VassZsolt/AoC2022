@@ -27,8 +27,22 @@ public class Day05Solver
     }
     public string SolvePart2(string inputFileContent)
     {
+        string[] lines = inputFileContent.Split("\r\n", StringSplitOptions.RemoveEmptyEntries); // mennyiség,honnan,hova
+        Warehouse warehouse = GenerateWarehouseStartState();
 
-        return "";
+        foreach (string line in lines)
+        {
+            string[] lineParts = line.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            warehouse.MoveCrates(int.Parse(lineParts[0]), int.Parse(lineParts[1]), int.Parse(lineParts[2]));
+        }
+
+        StringBuilder topNotations = new StringBuilder();
+        foreach (CrateTower tower in warehouse.crateTowers)
+        {
+            topNotations.Append(tower.GetTopNCrates(1).First().notation);
+        }
+
+        return topNotations.ToString();
     }
     public Warehouse GenerateWarehouseStartState()
     {
