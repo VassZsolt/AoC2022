@@ -13,14 +13,14 @@ public class Day05Solver
             string[] lineParts = line.Split(",", StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < int.Parse(lineParts[0]); i++)
             {
-                warehouse.MoveCrate(int.Parse(lineParts[1]), int.Parse(lineParts[2]));
+                warehouse.MoveCrates(1,int.Parse(lineParts[1]), int.Parse(lineParts[2]));
             }
         }
 
         StringBuilder topNotations = new StringBuilder();
         foreach (CrateTower tower in warehouse.crateTowers)
         {
-            topNotations.Append(tower.GetTopCrate().notation);
+            topNotations.Append(tower.GetTopNCrates(1).First().notation);
         }
 
         return topNotations.ToString();
