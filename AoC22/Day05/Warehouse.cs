@@ -9,7 +9,13 @@ public class CrateTower
     public List<Crate> tower;
 
     public CrateTower(List<Crate> crates) => tower = crates; // Az utolsó elem lesz a legfelső elem!
-    public void PlaceCrates(List<Crate> crates) => tower.AddRange(crates);
+    public void PlaceCrates(List<Crate> crates)
+    {
+        for(int i=crates.Count-1; i>=0; i--)
+        {
+            tower.Add(crates[i]);
+        }
+    }
     private void RemoveTopNCrates(int n)
     {
         for (int i = 0; i < n; i++)
