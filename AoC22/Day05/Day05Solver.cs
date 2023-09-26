@@ -1,9 +1,29 @@
-﻿namespace AoC22.Day05;
+﻿using System.Text;
+
+namespace AoC22.Day05;
 public class Day05Solver
 {
     public string SolvePart1(string inputFileContent)
     {
-        return "";
+        string[] lines = inputFileContent.Split("\r\n", StringSplitOptions.RemoveEmptyEntries); // mennyiség,honnan,hova
+        Warehouse warehouse = GenerateWarehouseStartState();
+
+        foreach (string line in lines)
+        {
+            string[] lineParts = line.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < int.Parse(lineParts[0]); i++)
+            {
+                warehouse.MoveCrate(int.Parse(lineParts[1]), int.Parse(lineParts[2]));
+            }
+        }
+
+        StringBuilder topNotations = new StringBuilder();
+        foreach (CrateTower tower in warehouse.crateTowers)
+        {
+            topNotations.Append(tower.GetTopCrate().notation);
+        }
+
+        return topNotations.ToString();
     }
     public string SolvePart2(string inputFileContent)
     {
