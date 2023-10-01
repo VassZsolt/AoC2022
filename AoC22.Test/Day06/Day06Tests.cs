@@ -29,5 +29,20 @@ public class Day06Tests
         result.Should().BeTrue();
     }
 
+    [Theory]
+    [InlineData("mjqjpqmgbljsphdztnvjfqwrcgsmlb", "7")]
+    [InlineData("bvwbjplbgvbhsrlpgdmjqwftvncz", "5")]
+    [InlineData("nppdvjthqldpwncqszvftbrmjlhg", "6")]
+    [InlineData("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", "10")]
+    [InlineData("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", "11")]
+
+    public void TestPart1(string input, string expectedResult)
+    {
+        Day06Solver solver = new Day06Solver();
+        string result = solver.SolvePart1(input);
+
+        result.Should().Be(expectedResult);
+    }
+
 
 }
