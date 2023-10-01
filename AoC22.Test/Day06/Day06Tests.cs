@@ -44,5 +44,44 @@ public class Day06Tests
         result.Should().Be(expectedResult);
     }
 
+    [Theory]
+    [InlineData("abc")] // Túl rövid
+    [InlineData("abcdefgijklmno")] // Túl hosszú
+    [InlineData("abcdefghijklma")] // Tartalmaz ismétlődést
+
+    public void ShouldBeInvalidMessageMarker(string messageMarker)
+    {
+        Day06Solver solver = new Day06Solver();
+        bool result = solver.isValidIdentifier(messageMarker);
+
+        result.Should().BeFalse();
+    }
+
+    [Theory]
+    [InlineData("abcdefghijklmn")] // Megfelelő
+
+    public void ShouldBeValidMessageMarker(string messageMarker)
+    {
+        Day06Solver solver = new Day06Solver();
+        bool result = solver.isValidIdentifier(messageMarker);
+
+        result.Should().BeTrue();
+    }
+
+    [Theory]
+    [InlineData("mjqjpqmgbljsphdztnvjfqwrcgsmlb", "19")]
+    [InlineData("bvwbjplbgvbhsrlpgdmjqwftvncz", "23")]
+    [InlineData("nppdvjthqldpwncqszvftbrmjlhg", "23")]
+    [InlineData("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", "29")]
+    [InlineData("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", "26")]
+
+    public void TestPart2(string input, string expectedResult)
+    {
+        Day06Solver solver = new Day06Solver();
+        string result = solver.SolvePart2(input);
+
+        result.Should().Be(expectedResult);
+    }
+
 
 }
