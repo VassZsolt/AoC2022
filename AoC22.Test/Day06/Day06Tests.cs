@@ -10,10 +10,10 @@ public class Day06Tests
     [InlineData("abcde")] // Túl hosszú
     [InlineData("abca")] // Tartalmaz ismétlődést
 
-    public void ShouldBeInvalidIdentitfier(string identifier)
+    public void ShouldBeInvalidMarker(string marker)
     {
         Day06Solver solver = new Day06Solver();
-        bool result = solver.isValidIdentifier(identifier);
+        bool result = solver.isValidMarker(marker, 4); // 4 a kívánt marker hossz
 
         result.Should().BeFalse();
     }
@@ -21,10 +21,10 @@ public class Day06Tests
     [Theory]
     [InlineData("abcd")] // Megfelő
 
-    public void ShouldBeValidIdentitfier(string identifier)
+    public void ShouldBeValidMarker(string marker)
     {
         Day06Solver solver = new Day06Solver();
-        bool result = solver.isValidIdentifier(identifier);
+        bool result = solver.isValidMarker(marker, 4); // 4 a kívánt marker hossz
 
         result.Should().BeTrue();
     }
@@ -46,13 +46,13 @@ public class Day06Tests
 
     [Theory]
     [InlineData("abc")] // Túl rövid
-    [InlineData("abcdefgijklmno")] // Túl hosszú
+    [InlineData("abcdefgijklmnop")] // Túl hosszú
     [InlineData("abcdefghijklma")] // Tartalmaz ismétlődést
 
     public void ShouldBeInvalidMessageMarker(string messageMarker)
     {
         Day06Solver solver = new Day06Solver();
-        bool result = solver.isValidIdentifier(messageMarker);
+        bool result = solver.isValidMarker(messageMarker, 14); // 14 a kívánt messageMarker hossz
 
         result.Should().BeFalse();
     }
@@ -63,7 +63,7 @@ public class Day06Tests
     public void ShouldBeValidMessageMarker(string messageMarker)
     {
         Day06Solver solver = new Day06Solver();
-        bool result = solver.isValidIdentifier(messageMarker);
+        bool result = solver.isValidMarker(messageMarker, 14); // 14 a kívánt messageMarker hossz
 
         result.Should().BeTrue();
     }

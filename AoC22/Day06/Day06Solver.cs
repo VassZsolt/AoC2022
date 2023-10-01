@@ -6,32 +6,22 @@ public class Day06Solver
     {
         for (int i = 0; i < inputFileContent.Length - 3; i++)
         {
-            if (isValidIdentifier(inputFileContent.Substring(i, 4)))
+            if (isValidMarker(inputFileContent.Substring(i, 4), 4))
             {
                 return (i + 4).ToString();
             }
         }
-        return "Not found valid identifier";
+        return "Not found valid marker";
     }
 
-    public bool isValidIdentifier(string identifier)
+    public bool isValidMarker(string marker, int expextedLength)
     {
-        if (identifier.Length != 4)
-        {
-            return false;
-        }
-        else
-        {
-            int numberOfUniqueItems = identifier.ToCharArray()
-                .Distinct()
-                .Count();
 
-            return numberOfUniqueItems switch
-            {
-                4 => true,
-                _ => false
-            };
-        }
+        int numberOfUniqueItems = marker.ToCharArray()
+            .Distinct()
+            .Count();
+
+        return numberOfUniqueItems == expextedLength;
     }
 
     public string SolvePart2(string inputFileContent)
