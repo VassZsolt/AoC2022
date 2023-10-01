@@ -26,6 +26,13 @@ public class Day06Solver
 
     public string SolvePart2(string inputFileContent)
     {
-        return "";
+        for (int i = 0; i < inputFileContent.Length - 13; i++)
+        {
+            if (isValidMarker(inputFileContent.Substring(i, 14), 14))
+            {
+                return (i + 14).ToString();
+            }
+        }
+        return "Not found valid message marker";
     }
 }
