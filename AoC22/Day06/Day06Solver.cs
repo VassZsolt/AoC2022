@@ -4,7 +4,14 @@ public class Day06Solver
 {
     public string SolvePart1(string inputFileContent)
     {
-        return "";
+        for (int i = 0; i < inputFileContent.Length - 3; i++)
+        {
+            if (isValidIdentifier(inputFileContent.Substring(i, 4)))
+            {
+                return (i + 4).ToString();
+            }
+        }
+        return "Not found valid identifier";
     }
 
     public bool isValidIdentifier(string identifier)
@@ -15,7 +22,7 @@ public class Day06Solver
         }
         else
         {
-            int numberOfUniqueItems =identifier.ToCharArray()
+            int numberOfUniqueItems = identifier.ToCharArray()
                 .Distinct()
                 .Count();
 
